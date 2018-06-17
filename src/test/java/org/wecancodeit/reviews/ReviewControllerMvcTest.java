@@ -1,12 +1,13 @@
 package org.wecancodeit.reviews;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static java.util.Arrays.asList;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 import javax.annotation.Resource;
@@ -22,49 +23,51 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 @WebMvcTest(ReviewController.class)
 public class ReviewControllerMvcTest {
+	
 	@Resource
 	private MockMvc mvc;
 	
-	@MockBean
-	private ReviewRepository reviewRepo;
 	
 	@Mock
 	private Review reviewOne;
 	
-	@Mock Review reviewTwo;
+	@Mock 
+	private Review reviewTwo;
+	
+	@MockBean
+	private ReviewRepository repository;
 	
 	@Test
-	public void shouldBeOKForAllReviews() throws Exception {
+	public void shouldBeOkForAllReviews() throws Exception {
 		mvc.perform(get("/show-reviews")).andExpect(status().isOk());
 	}
 	
 	@Test
-	public void shouldGenerateViewForAllReviews() throws Exception {
-		mvc.perform(get("/show-reviews")).andExpect(view().name("reviewsTemplate"));
+	public void shouldRouteToAllReviewsView() throws Exception {
+		mvc.perform(get("/show-reviews")).andExpect(view().name(is("reviews")));
 	}
 
 	@Test
-	public void shouldShowAllReviewsInModel() throws Exception {
-		Collection<Review> allReviewsInModel = Arrays.asList(reviewOne, reviewTwo);
-		when(reviewRepo.findAll()).thenReturn(allReviewsInModel);
-		mvc.perform(get("/show-reviews")).andExpect(model().attribute("reviewsModel", allReviewsInModel));
+	public void shouldPutAllReviewsIntoModel() throws Exception {
+		Collection<Review> allReviews = asList(reviewOne, reviewTwo);
+		when(repository.findAll()).thenReturn(allReviews);
+		mvc.perform(get("/show-reviews")).andExpect(model().attribute("reviews", is(allReviews)));
 	}
 	
 	@Test
-	public void shouldBeOkForAReview() throws Exception {
-		mvc.perform(get("/show-single-review?id=1")).andExpect(status().isOk());
-	}
-
-	@Test
-	public void shouldGenerateViewForACourse() throws Exception {
-		mvc.perform(get("/show-single-review?id=1")).andExpect(view().name("reviewTemplate"));
+	public void shouldBeOkForSingleReview() throws Exception {
+		mvc.perform(get("/review?id=1")).andExpect(status().isOk());
 	}
 	
 	@Test
-	public void shouldShowARevieInModel() throws Exception {
-		Long reviewOneId = 1L;
-		when(reviewRepo.findOneReview(reviewOneId)).thenReturn(reviewOne);
-		mvc.perform(get("/show-single-review?id=1")).andExpect(model().attribute("reviewsModel", reviewOne));
+	public void shouldRouteToSingleReviewView() throws Exception {
+		mvc.perform(get("/review?id=1")).andExpect(view().name(is("review")));
+	}
+	
+	@Test
+	public void shouldPutASingleReviewIntoModel() throws Exception {
+		when(repository.findOneReview(1L)).thenReturn(reviewOne);
+		mvc.perform(get("/review?id=1")).andExpect(model().attribute("reviews", is(reviewOne)));
 	}
 
 }

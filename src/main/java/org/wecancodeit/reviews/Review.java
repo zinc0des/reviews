@@ -9,7 +9,7 @@ public class Review {
 	private String description;
 	private String imageUrl;
 	private String category;
-	private Date date;
+	private Date dateOfReview;
 	private String content;
 
 	public long getId() {
@@ -52,12 +52,12 @@ public class Review {
 		this.category = category;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getDateOfReview() {
+		return dateOfReview;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(Date dateOfReview) {
+		this.dateOfReview = dateOfReview;
 	}
 
 	public String getContent() {
@@ -80,7 +80,7 @@ public class Review {
 		this.description = description;
 		this.imageUrl = imageURL;
 		this.category = category; 
-		this.date = Date.from(Instant.now());
+		this.dateOfReview = new Date();//Date.from(Instant.now());
 		this.content = content;
 	}
 

@@ -4,6 +4,10 @@
 	<title>A Review</title>
 </head>
 <body>
-	<h1>A Single Review</h1>
+	<div th:each="review: ${reviews}">
+		<h2 th:text="${review.title} + ', ' + "${review.description}"></h2>
+		<p>Date of Review: <strong th:text="${#dates.format(review.dateOfReview, 'dd-MMM-yyyy')}">22-May-2018</strong></p>
+		<img id = "images" th:src="@{${review.imageUrl}}"/><br/>
+	</div>
 </body>
 </html>

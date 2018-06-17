@@ -4,16 +4,19 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class ReviewRepository {
 
-	Map<Long, Review> listOfReviews = new HashMap<>();
+	private Map<Long, Review> listOfReviews = new HashMap<>();
 
 	public ReviewRepository() {
 		Review music = new Review(1L, "Beethoven was a gifted musician", "Classical Music", "Music",
 				"This is no secret...", "http://www.music.edu");
-		Review tennis = new Review(1L, "Serena Willams is awesome", "Tennis", "Sports", "I love watching Serena serve.",
+		Review tennis = new Review(2L, "Serena Willams is awesome", "Tennis", "Sports", "I love watching Serena serve.",
 				"http://www.wimbledon.com");
-		Review burger = new Review(1L, "How to make a juicy vegan burger", "Food", "Cooking",
+		Review burger = new Review(3L, "How to make a juicy veggie burger", "Food", "Cooking",
 				"Ever had a vegan burger?", "http://www.cooking.org");
 
 		listOfReviews.put(music.getId(), music);
