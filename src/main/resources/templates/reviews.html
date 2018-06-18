@@ -4,11 +4,11 @@
 	<title>reviews</title>
 </head>
 <body>
-	<h1>A List of Reviews on Different Topics</h1>
+	<h1>A List of Reviews on Various Topics</h1>
 
 	<div th:each="review: ${reviews}">
 		<li>
-		<a th:href="@{review(id=${review.id})}" th:text="${review.category}"></a>	
+		<a th:href="@{review(id=${review.id})}" th:text="${review.category}"><strong></a>	
 		</li>
 	</div>
 </body>
