@@ -13,11 +13,11 @@ public class ReviewRepository {
 
 	public ReviewRepository() {
 		Review music = new Review(1L, "Beethoven was a gifted musician", "Classical Music", "Music",
-				"This is no secret...", "http://www.music.edu");
+				"This is no secret...", "images/beethoven.jpg");
 		Review tennis = new Review(2L, "Serena Willams is awesome", "Tennis", "Sports", "I love watching Serena serve.",
-				"http://www.wimbledon.com");
+				"images/serena-williams.jpg");
 		Review burger = new Review(3L, "How to make a juicy veggie burger", "Food", "Cooking",
-				"Ever had a vegan burger?", "http://www.cooking.org");
+				"Ever had a vegan burger?", "images/veggie-burger.jpg");
 
 		listOfReviews.put(music.getId(), music);
 		listOfReviews.put(tennis.getId(), tennis);

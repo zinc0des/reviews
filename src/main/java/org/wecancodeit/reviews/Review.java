@@ -80,7 +80,7 @@ public class Review {
 		this.description = description;
 		this.imageUrl = imageURL;
 		this.category = category; 
-		this.dateOfReview = new Date();//Date.from(Instant.now());
+		this.dateOfReview = Date.from(Instant.now());
 		this.content = content;
 	}
 
