@@ -6,8 +6,8 @@
 <body>
 	<div th:each="review:${reviews}">
 		<h2 th:text="${review.title} + ' - ' + ${review.description}"></h2>
-		<p>Date of Review: <strong th:text="${#dates.format(review.dateOfReview, 'dd-MMM-yyyy')}">22-May-2018</strong></p>
-		<main><bold th:text="${review.content}"></bold></main>
+		<p th:text=" 'Date: '+ ${#dates.format(review.dateOfReview, 'dd-MMM-yyyy')}">22-May-2018</p>
+		<main><strong th:text="${review.content}"></strong></main>
 		<br><img id = "images" th:src="@{${review.imageUrl}}"/><br/>
 		<a href="http://localhost:8080/show-reviews">Back to home</a>
 
